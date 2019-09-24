@@ -37,8 +37,9 @@ public class _04_RemovingStuffFromArrayLists {
 		/* TODO 1: Clean out the dirt but keep the delicious worms. */
 		
 		for (int i = 0; i < stuffIFoundInTheYard.size(); i++ ) {
-			if (stuffIFoundInTheYard.contains(Worm())) {
-				
+			if (stuffIFoundInTheYard.get(i) instanceof Dirt) {
+				stuffIFoundInTheYard.remove(i);
+				i--;
 			}
 		}
 		
@@ -79,7 +80,17 @@ public class _04_RemovingStuffFromArrayLists {
 		truth.add('r');
 		truth.add('#');
 		/* TODO 2: Remove the hash symbols and print out the truth. */
-
+		
+		for (int j = 0; j < truth.size(); j ++) {
+			if (truth.get(j) == '#') {
+				truth.remove(j);
+				j--;
+			}
+			else {
+				System.out.println(truth.get(j));
+			}
+		}
+		
 		
 		
 	}
