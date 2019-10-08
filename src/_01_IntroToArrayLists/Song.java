@@ -73,6 +73,7 @@ public class Song {
 		else
 			this.songStream = loadStreamFromComputer();
 	}
+	
 
 	private InputStream loadStreamFromInternet() {
 		try {
