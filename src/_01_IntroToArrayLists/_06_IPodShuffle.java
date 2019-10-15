@@ -21,15 +21,18 @@ public class _06_IPodShuffle implements ActionListener{
 		// 1. Use the Song class the play the demo.mp3 file.
 		Frame = new JFrame();
 		Panel = new JPanel();
+		Button = new JButton();
 		Frame.add(Panel);
 		Panel.add(Button);
 		Frame.setVisible(true);
-		Button = new JButton();
+		
 		Button.addActionListener(this);
 		Button.setText("Suprize Me!!");
 		Frame.pack();
 		
-		
+		Song song1 = new Song("demo.mp3");
+		ShuffleSong.add(song1);
+				
 		/**
 		 * 2. Congratulations on completing the sound check! * Now we want to make an
 		 * iPod Shuffle that plays random music. * Create an ArrayList of Songs and a
@@ -47,6 +50,8 @@ public class _06_IPodShuffle implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if (Button == e.getSource()) {
+			
+		}
 	}
 }
