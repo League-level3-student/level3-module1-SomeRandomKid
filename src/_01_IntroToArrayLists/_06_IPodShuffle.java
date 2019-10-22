@@ -17,6 +17,7 @@ public class _06_IPodShuffle implements ActionListener{
 	JFrame Frame;
 	JPanel Panel;
 	JButton Button;
+	Song current;
 	public _06_IPodShuffle() {
 		// 1. Use the Song class the play the demo.mp3 file.
 		Frame = new JFrame();
@@ -32,6 +33,14 @@ public class _06_IPodShuffle implements ActionListener{
 		
 		Song song1 = new Song("demo.mp3");
 		ShuffleSong.add(song1);
+		Song song2= new Song("223.mp3");
+		ShuffleSong.add(song2);
+		Song song3  = new Song("FN.mp3");
+		ShuffleSong.add(song3);
+		Song song4  = new Song("Ransom.mp3");
+		ShuffleSong.add(song4);
+		Song song5  = new Song("Bad.mp3");
+		ShuffleSong.add(song5);
 				
 		/**
 		 * 2. Congratulations on completing the sound check! * Now we want to make an
@@ -50,8 +59,14 @@ public class _06_IPodShuffle implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		int num = new Random().nextInt(ShuffleSong.size());
+		if (current != null) {
+			current.stop();
+		}
+		
 		if (Button == e.getSource()) {
-			
+			current = ShuffleSong.get(num);
+			ShuffleSong.get(num).play();
 		}
 	}
 }
