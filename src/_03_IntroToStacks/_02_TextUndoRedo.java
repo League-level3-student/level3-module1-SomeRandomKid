@@ -22,6 +22,10 @@ public class _02_TextUndoRedo implements KeyListener {
 	 * off the Stack and added back to the JLabel.
 	 * 
 	 * */
+	public static void main(String[] args) {
+		_02_TextUndoRedo write = new _02_TextUndoRedo();
+	}
+	
 	Stack<Character> erased = new Stack<Character>();
 	JFrame Frame;
 	JLabel Label;
@@ -34,6 +38,9 @@ public class _02_TextUndoRedo implements KeyListener {
 	Frame.add(Panel);
 	Panel.add(Label);
 	Label.addKeyListener(this);
+	Frame.setVisible(true);
+	Frame.addKeyListener(this);
+	Frame.pack();
 }
 
 	@Override
@@ -48,10 +55,19 @@ public class _02_TextUndoRedo implements KeyListener {
 			String text = Label.getText();
 			char bksp = text.charAt(text.length() - 1);
 			erased.push(bksp);
-		} else {
+			text = text.substring(0, text.length()-1);
+			Label.setText(text);
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			char undo = erased.pop();
+			Label.setText(Label.getText() + undo);
+			
+		}
+		else {
 		char key = e.getKeyChar();
 		Label.setText(Label.getText()+key);
 		}
+		
 	}
 
 	@Override
