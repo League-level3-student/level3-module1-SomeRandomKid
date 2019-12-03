@@ -23,7 +23,6 @@ public class HangMan{
 		Frame.add(Panel);
 		Panel.add(Label);
 		Frame.setVisible(true);
-		Frame.setSize(200, 400);
 		Stack<String> HangStack = new Stack<String>();
 		String response = JOptionPane.showInputDialog("Pick a Number from 1 through 266. (This will determin the amount of words you'll guess)");
 		int dictValue = Integer.parseInt(response);
@@ -35,6 +34,6 @@ public class HangMan{
 			HangStack.push(word);
 		}
 		HangStack.pop();
-		
+		Label.setText
 	}
 }
