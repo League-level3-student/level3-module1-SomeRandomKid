@@ -1,5 +1,7 @@
 package _04_HangMan;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
 import java.util.Stack;
 
@@ -8,10 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class HangMan{
+public class HangMan implements KeyListener{
+	Stack<String> HangStack = new Stack<String>();
+	int lives = 5;
 	JFrame Frame;
 	JPanel Panel;
 	JLabel Label;
+	String guess;
+	
 	public static void main(String[] args) {
 		HangMan test = new HangMan();
 	}
@@ -33,7 +39,34 @@ public class HangMan{
 			}
 			HangStack.push(word);
 		}
-		HangStack.pop();
-		Label.setText
+		guess = HangStack.pop();
+		String line = "";
+		for (int i = 0; i < guess.length(); i++) {
+			line += "_";
+		}
+		Label.setText(line);
+		Frame.pack();
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		char key = e.getKeyChar();
+		 if (guess.)) {
+			 
+		 }
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
