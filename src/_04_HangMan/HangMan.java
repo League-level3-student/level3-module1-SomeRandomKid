@@ -17,6 +17,8 @@ public class HangMan implements KeyListener{
 	JPanel Panel;
 	JLabel Label;
 	String guess;
+	String line;
+	String displayWord;
 	
 	public static void main(String[] args) {
 		HangMan test = new HangMan();
@@ -40,15 +42,13 @@ public class HangMan implements KeyListener{
 			HangStack.push(word);
 		}
 		guess = HangStack.pop();
-		String line = "";
+		line = "";
 		for (int i = 0; i < guess.length(); i++) {
-			line += "_";
+			line += "_";      
 		}
 		Label.setText(line);
 		Frame.pack();
-		
 	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -59,9 +59,17 @@ public class HangMan implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		char key = e.getKeyChar();
-		 if (guess.)) {
-			 
+		String displayWord = "";
+		for (int i = 0; i < guess.length(); i++) {
+			char letter = guess.charAt(i);
+		 if (letter == key) {
+			 displayWord += key;
 		 }
+		 else {
+			 displayWord += line.charAt(i);
+			 lives -= 1;
+		 }
+		}
 	}
 
 	@Override
