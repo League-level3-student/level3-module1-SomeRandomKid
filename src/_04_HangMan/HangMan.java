@@ -30,6 +30,7 @@ public class HangMan implements KeyListener{
 		Label = new JLabel();
 		Frame.add(Panel);
 		Panel.add(Label);
+		Frame.addKeyListener(this);
 		Frame.setVisible(true);
 		Stack<String> HangStack = new Stack<String>();
 		String response = JOptionPane.showInputDialog("Pick a Number from 1 through 266. (This will determin the amount of words you'll guess)");
@@ -40,7 +41,12 @@ public class HangMan implements KeyListener{
 				word = Utilities.readRandomLineFromFile("dictionary.txt");
 			}
 			HangStack.push(word);
-		}
+			System.out.println(word);
+		}	
+		wordFrame();
+	}
+	
+	public void wordFrame() {
 		guess = HangStack.pop();
 		line = "";
 		for (int i = 0; i < guess.length(); i++) {
@@ -48,7 +54,9 @@ public class HangMan implements KeyListener{
 		}
 		Label.setText(line);
 		Frame.pack();
+	
 	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -58,18 +66,20 @@ public class HangMan implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		String lineChar = Label.getText();
 		char key = e.getKeyChar();
 		String displayWord = "";
 		for (int i = 0; i < guess.length(); i++) {
 			char letter = guess.charAt(i);
 		 if (letter == key) {
-			 displayWord += key;
+			 displayWord  += key;
 		 }
 		 else {
-			 displayWord += line.charAt(i);
+			 displayWord += lineChar.charAt(i);
 			 lives -= 1;
 		 }
 		}
+		Label.setText(displayWord);
 	}
 
 	@Override
