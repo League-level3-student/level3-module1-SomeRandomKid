@@ -19,6 +19,7 @@ public class HangMan implements KeyListener{
 	String guess;
 	String line;
 	String displayWord;
+	String lineChar;
 	
 	public static void main(String[] args) {
 		HangMan test = new HangMan();
@@ -42,12 +43,22 @@ public class HangMan implements KeyListener{
 			}
 			HangStack.push(word);
 			System.out.println(word);
+			if (HangStack.empty()) {
+				
+			}
 		}	
 		wordFrame();
+		
+		
 	}
 	
 	public void wordFrame() {
+		if (HangStack.empty() == false) {
 		guess = HangStack.pop();
+		}
+		else {
+			
+		}
 		line = "";
 		for (int i = 0; i < guess.length(); i++) {
 			line += "_";      
@@ -66,7 +77,7 @@ public class HangMan implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		String lineChar = Label.getText();
+		lineChar = Label.getText();
 		char key = e.getKeyChar();
 		String displayWord = "";
 		for (int i = 0; i < guess.length(); i++) {
@@ -80,6 +91,10 @@ public class HangMan implements KeyListener{
 		 }
 		}
 		Label.setText(displayWord);
+		
+		if (displayWord.contains("_") == false) {
+			wordFrame();
+		}
 	}
 
 	@Override
