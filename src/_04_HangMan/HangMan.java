@@ -1,5 +1,7 @@
 package _04_HangMan;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
@@ -11,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class HangMan implements KeyListener{
+public class    HangMan implements KeyListener, ActionListener{
 	Stack<String> HangStack = new Stack<String>();
 	int lives = 5;
 	JFrame Frame;
@@ -93,6 +95,15 @@ public class HangMan implements KeyListener{
 		if (displayWord.contains("_") == false) {
 			wordFrame();
 			if (lives == 0 || HangStack.empty()) {
+				Frame = new JFrame();
+				Panel = new JPanel();
+				Label = new JLabel();
+				Yes = new JButton();
+				No = new JButton();
+				Frame.add(Panel);
+				Panel.add(Label);
+				Panel.add(Yes);
+				Panel.add(No);
 				
 			}
 		}
@@ -100,6 +111,12 @@ public class HangMan implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
