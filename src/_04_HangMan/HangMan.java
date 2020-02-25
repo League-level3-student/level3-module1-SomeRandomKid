@@ -55,17 +55,18 @@ public class    HangMan implements KeyListener, ActionListener{
 	}
 	
 	public void wordFrame() {
+		System.out.println(HangStack.size());
 		if (HangStack.empty() == false) {
 		guess = HangStack.pop();  
 		System.out.println(guess);
-		}
+		
 		line = "";
 		for (int i = 0; i < guess.length(); i++) {
 			line += "_";      
 		}
 		Label.setText(line);
 		Frame.pack();
-	
+	}
 	}
 	
 	@Override
@@ -76,6 +77,8 @@ public class    HangMan implements KeyListener, ActionListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println(guess.length());
+		System.out.println(Label.getText());
 		// TODO Auto-generated method stub
 		lineChar = Label.getText();
 		char key = e.getKeyChar();
@@ -91,20 +94,20 @@ public class    HangMan implements KeyListener, ActionListener{
 		 }
 		}
 		Label.setText(displayWord);
+		Frame.pack();
 		
 		if (displayWord.contains("_") == false) {
-			wordFrame();
+			
 			if (lives == 0 || HangStack.empty()) {
-				Frame = new JFrame();
-				Panel = new JPanel();
-				Label = new JLabel();
 				Yes = new JButton();
 				No = new JButton();
-				Frame.add(Panel);
-				Panel.add(Label);
 				Panel.add(Yes);
 				Panel.add(No);
+				Frame.pack();
 				
+			}
+			else {
+			wordFrame();
 			}
 		}
 	}
