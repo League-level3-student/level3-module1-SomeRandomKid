@@ -13,12 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class    HangMan implements KeyListener, ActionListener{
+public class  HangMan implements KeyListener{
 	Stack<String> HangStack = new Stack<String>();
 	int lives = 5;
 	JFrame Frame;
 	JPanel Panel;
 	JLabel Label;
+	JLabel showLives;
 	JButton Yes;
 	JButton No;
 	String guess;
@@ -34,25 +35,31 @@ public class    HangMan implements KeyListener, ActionListener{
 		Frame = new JFrame();
 		Panel = new JPanel();
 		Label = new JLabel();
+		showLives = new JLabel();
 		Frame.add(Panel);
 		Panel.add(Label);
+		Panel.add(showLives);
 		Frame.addKeyListener(this);
 		Frame.setVisible(true);
+		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 HangStack = new Stack<String>();
-		String response = JOptionPane.showInputDialog("Pick a Number from 1 through 266. (This will determin the amount of words you'll guess)");
-		int dictValue = Integer.parseInt(response);
-		for(int i = 0; i < dictValue; i++) {
-			String word = Utilities.readRandomLineFromFile("dictionary.txt");
-			while (HangStack.contains(word)) {
-				word = Utilities.readRandomLineFromFile("dictionary.txt");
-			}
-			HangStack.push(word);
-			
-		}	
-		wordFrame();
-		
-		
+		InitializeGame();
 	}
+	public void InitializeGame() {
+		lives = 5;
+	String response = JOptionPane.showInputDialog("Pick a Number from 1 through 266. (This will determin the amount of words you'll guess)");
+	int dictValue = Integer.parseInt(response);
+	for(int i = 0; i < dictValue; i++) {
+		String word = Utilities.readRandomLineFromFile("dictionary.txt");
+		while (HangStack.contains(word)) {
+			word = Utilities.readRandomLineFromFile("dictionary.txt");
+		}
+		HangStack.push(word);
+		
+	}	
+	wordFrame();
+	}
+	
 	
 	public void wordFrame() {
 		System.out.println(HangStack.size());
@@ -65,6 +72,7 @@ public class    HangMan implements KeyListener, ActionListener{
 			line += "_";      
 		}
 		Label.setText(line);
+		showLives.setText("Lives: " + lives);
 		Frame.pack();
 	}
 	}
@@ -83,31 +91,49 @@ public class    HangMan implements KeyListener, ActionListener{
 		lineChar = Label.getText();
 		char key = e.getKeyChar();
 		String displayWord = "";
+		boolean charCorrect = false;
 		for (int i = 0; i < guess.length(); i++) {
 			char letter = guess.charAt(i);
 		 if (letter == key) {
 			 displayWord  += key;
+			 charCorrect = true;
 		 }
 		 else {
 			 displayWord += lineChar.charAt(i);
-			 lives -= 1;
+			 
 		 }
+		}
+		if (charCorrect == false) {
+			lives -= 1;
+			showLives.setText("Lives: " + lives);
 		}
 		Label.setText(displayWord);
 		Frame.pack();
 		
 		if (displayWord.contains("_") == false) {
 			
-			if (lives == 0 || HangStack.empty()) {
-				Yes = new JButton();
-				No = new JButton();
-				Panel.add(Yes);
-				Panel.add(No);
-				Frame.pack();
+			if (HangStack.empty()) {
+				int returnValue = JOptionPane.showConfirmDialog(null, "Do You Wish to Play Again?");
+				if (returnValue == 0) {
+					InitializeGame();
+					
+				}
+				else if (returnValue == 1) {
+					System.exit(1);
+				}
+				
+			} else {
+				wordFrame();
+			}
+		}
+		if (lives == 0) {
+			int returnValue = JOptionPane.showConfirmDialog(null, "Do You Wish to Play Again?");
+			if (returnValue == 0) {
+				InitializeGame();
 				
 			}
-			else {
-			wordFrame();
+			else if (returnValue == 1) {
+				System.exit(1);
 			}
 		}
 	}
@@ -118,9 +144,6 @@ public class    HangMan implements KeyListener, ActionListener{
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+
 }
