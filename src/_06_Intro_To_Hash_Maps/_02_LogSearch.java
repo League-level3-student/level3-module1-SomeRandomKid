@@ -1,22 +1,61 @@
 package _06_Intro_To_Hash_Maps;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class _02_LogSearch {
+public class _02_LogSearch implements ActionListener {
+	HashMap<Integer, String> values = new HashMap<Integer, String>();
+	 JFrame Frame;
+	 JPanel Panel;
+	 JButton Button1;
+	 JButton Button2; 
+	 JButton Button3;
+	 
 	public static void main(String[] args) {
-		 HashMap<Integer, String> values = new HashMap<Integer, String>();
-		 JFrame Frame = new JFrame();
-		 JPanel Panel = new JPanel();
-		 JButton Button1 = new JButton();
-		 JButton Button2 = new JButton();
-		 JButton Button3 = new JButton();
-		 
-		 
+		 _02_LogSearch start = new _02_LogSearch();
 	}
+	
+	_02_LogSearch() { 
+		 Frame = new JFrame();
+		 Frame.setVisible(true);
+		 Panel = new JPanel();
+		 Button1 = new JButton();
+		 Button2 = new JButton();
+		 Button3 = new JButton();
+		 Frame.add(Panel);
+		 Panel.add(Button1);
+		 Panel.add(Button2);
+		 Panel.add(Button3);
+		 Button1.addActionListener(this);
+		 Button1.setText("Add Entry");
+		 Button2.addActionListener(this);
+		 Button2.setText("Search by ID");
+		 Button3.addActionListener(this);
+		 Button3.setText("View List");
+		 Frame.pack();
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton ButtonPressed = (JButton) e.getSource();
+		if (ButtonPressed == Button1) {
+			String input = JOptionPane.showInputDialog("Enter an ID number.");
+			int IDnum = Integer.parseInt(input);
+			String name = JOptionPane.showInputDialog("Enter a Name.");
+			values.put(IDnum, name);
+		}
+		if (ButtonPressed == Button2) {
+			
+		}
+	}
+
   /* 
 	 * Crate a HashMap of Integers for the keys and Strings for the values.
 	 * Create a GUI with three buttons. 
@@ -44,4 +83,5 @@ public class _02_LogSearch {
 	 * 				is not in the list. 
 	 *
 	 * */
+
 }
