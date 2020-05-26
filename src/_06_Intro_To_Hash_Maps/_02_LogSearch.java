@@ -26,22 +26,19 @@ public class _02_LogSearch implements ActionListener {
 		 Frame = new JFrame();
 		 Frame.setVisible(true);
 		 Panel = new JPanel();
-		 Button1 = new JButton();
-		 Button2 = new JButton();
-		 Button3 = new JButton();
+		 Button1 = new JButton("Add Entry");
+		 Button2 = new JButton("Search by ID");
+		 Button3 = new JButton("View List");
+		 Button4 = new JButton("Remove Entry");
 		 Frame.add(Panel);
 		 Panel.add(Button1);
 		 Panel.add(Button2);
 		 Panel.add(Button3);
 		 Panel.add(Button4);
 		 Button1.addActionListener(this);
-		 Button1.setText("Add Entry");
 		 Button2.addActionListener(this);
-		 Button2.setText("Search by ID");
 		 Button3.addActionListener(this);
-		 Button3.setText("View List");
 		 Button4.addActionListener(this);
-		 Button4.setText("Remove Entry");
 		 Frame.pack();
 	}
 	
@@ -59,18 +56,30 @@ public class _02_LogSearch implements ActionListener {
 		if (ButtonPressed == Button2) {
 			String input2 = JOptionPane.showInputDialog("Enter an ID number.");
 			int IDCheck = Integer.parseInt(input2);
-			if (IDnum == IDCheck) {
-				System.out.println(values.get(IDnum));
+			for (Integer i : values.keySet()) {
+			if (i == IDCheck) {
+				JOptionPane.showMessageDialog(null, values.get(IDCheck));
+				return;
 			}
-			else {
+			}
 				JOptionPane.showMessageDialog(null, "That entry does not exist.");
 			}
-		}
+		
 		if (ButtonPressed == Button3) {
 			String blank = "";
-			
+			for (Integer i : values.keySet()) {
+				String names = values.get(i);
+				blank += "ID: " + i + "   Name: " + names + "\n";
 			}
+			JOptionPane.showMessageDialog(null, blank);
+			}
+		if (ButtonPressed == Button4) {
+			String removal = JOptionPane.showInputDialog("Enter an ID to remove an Entry.");
+			int removeID = Integer.parseInt(removal);
+			values.remove(removeID);
 		}
+		}
+	
 	}
 
   /* 
@@ -101,4 +110,3 @@ public class _02_LogSearch implements ActionListener {
 	 *
 	 * */
 
-}
